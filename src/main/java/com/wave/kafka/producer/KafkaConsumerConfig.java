@@ -17,7 +17,7 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
 
 @Configuration
-@EnableKafka
+//@EnableKafka
 public class KafkaConsumerConfig {
 
 
@@ -32,7 +32,7 @@ public class KafkaConsumerConfig {
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,
                 StringDeserializer.class);
         // allows a pool of processes to divide the work of consuming and processing records
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, "group-id");
+       // props.put(ConsumerConfig.GROUP_ID_CONFIG, "group-id");
         // automatically reset the offset to the earliest offset
         props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 
@@ -73,5 +73,10 @@ public class KafkaConsumerConfig {
     @Bean(name = "stringMessageReceiver")
     public WaveMessageConsumer receiver() {
         return new WaveMessageConsumer();
+    }
+
+    @Bean(name = "userMessageReceiver")
+    public WaveUserMessageConsumer receiverUser() {
+        return new WaveUserMessageConsumer();
     }
 }

@@ -1,5 +1,16 @@
 spring:
+  cloud:
+    stream:
+      bindings:
+        input:
+          destination: input
+        output:
+          destination: output
+        output-sink:
+          destination: output
+      default-binder: kafka
   kafka:
+    client-id: square-finder
     consumer:
       group-id: tpd-loggers
       auto-offset-reset: earliest
@@ -14,3 +25,8 @@ tpd:
 server:
   servlet:
     context-path: /wave
+
+kafka:
+  topic:
+    input: input
+    output: outputStream
