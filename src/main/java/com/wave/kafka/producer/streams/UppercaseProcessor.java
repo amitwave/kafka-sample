@@ -15,7 +15,7 @@ public class UppercaseProcessor {
     @StreamListener(Processor.INPUT)
     @SendTo(Processor.OUTPUT)
     public String process(String s) {
-        System.out.println("In the Processor " + s);
+        System.out.println("In the UppercaseProcessor 22 " + s);
         return s.toUpperCase();
     }
 

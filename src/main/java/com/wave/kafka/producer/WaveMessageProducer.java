@@ -38,6 +38,8 @@ public class WaveMessageProducer {
         user.setPreference(user.getId() %2 == 0 ? Preference.COFFEE: Preference.TEA);
 
         kafkaUserTemplate.send("testuser", user.getId().toString(), user);
+        kafkaUserTemplate.send("inputuser", user.getId().toString(), user);
+        kafkaUserTemplate.send("inputuserstream", user.getId().toString(), user);
 
     }
 

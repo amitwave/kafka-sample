@@ -6,9 +6,29 @@ spring:
           destination: input
         output:
           destination: output
+        outputuser:
+          destination: outputuser
+        inputuser:
+          destination: inputuser
+        outputuserstream:
+          destination: outputuserstream
+          type: kstream
+        outputuserstreamtea:
+          destination: outputuserstreamtea
+          type: kstream
+          contentType: application/json
+        outputuserstreamcoffee:
+          destination: outputuserstreamcoffee
+          type: kstream
+          contentType: application/json
+        inputuserstream:
+          destination: inputuserstream
+          type: kstream
         output-sink:
           destination: output
-      default-binder: kafka
+
+
+    ## default-binder: kafka
   kafka:
     client-id: square-finder
     consumer:

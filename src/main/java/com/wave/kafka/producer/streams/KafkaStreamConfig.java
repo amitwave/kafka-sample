@@ -23,6 +23,7 @@ import org.springframework.kafka.annotation.KafkaStreamsDefaultConfiguration;
 import org.springframework.kafka.config.KafkaStreamsConfiguration;
 import org.springframework.kafka.config.StreamsBuilderFactoryBean;
 import org.springframework.kafka.config.StreamsBuilderFactoryBeanCustomizer;
+import org.springframework.kafka.core.CleanupConfig;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,6 +35,10 @@ import static org.springframework.kafka.annotation.KafkaStreamsDefaultConfigurat
 @EnableKafkaStreams
 public class KafkaStreamConfig {
 
+
+
+    @Autowired
+    private KafkaProperties kafkaProperties;
 
     @Primary
     //@Bean(name = "defaultKafkaStreams")
@@ -66,16 +71,30 @@ public class KafkaStreamConfig {
         return config;
     }
 
+    @Bean("userStreamsConfig")
+    public Map<String, Object> userStreamsConfig(KafkaProperties kafkaProperties) {
+        Map<String, Object> config = new HashMap<>();
+        config.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProperties.getBootstrapServers());
+        config.put(StreamsConfig.APPLICATION_ID_CONFIG, kafkaProperties.getClientId()+1);
+        config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());
+        config.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.serdeFrom(new UserSerialiser(), new UserDeserializer()).getClass());
+        return config;
+    }
 
-   // @Bean(name = "customStreamBuilder")
-    public StreamsBuilderFactoryBean customStreamBuilder(
+
+    @Bean(name = "customStreamBuilder")
+    public FactoryBean<StreamsBuilder> customStreamBuilder(@Qualifier("userStreamsConfig") Map<String, Object> config,
             @Qualifier(DEFAULT_STREAMS_CONFIG_BEAN_NAME)
                     ObjectProvider<KafkaStreamsConfiguration> streamsConfigProvider,
             ObjectProvider<StreamsBuilderFactoryBeanCustomizer> customizerProvider) {
 
+        config.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProperties.getBootstrapServers());
+        config.put(StreamsConfig.APPLICATION_ID_CONFIG, "my-app");
+        config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());
+        config.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.serdeFrom(new UserSerialiser(), new UserDeserializer()).getClass());
 
 
-        KafkaStreamsConfiguration streamsConfig = streamsConfigProvider.getIfAvailable();
+        KafkaStreamsConfiguration streamsConfig = new KafkaStreamsConfiguration(config);
         if (streamsConfig != null) {
            //streamsConfig.asProperties().setProperty(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.serdeFrom(new UserSerialiser(), new UserDeserializer()).getClass()));
             StreamsBuilderFactoryBean fb = new StreamsBuilderFactoryBean(streamsConfig);
@@ -83,6 +102,7 @@ public class KafkaStreamConfig {
             if (customizer != null) {
                 customizer.configure(fb);
             }
+
 
 
             return fb;

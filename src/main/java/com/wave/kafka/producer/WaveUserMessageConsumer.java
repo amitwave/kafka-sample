@@ -10,7 +10,7 @@ public class WaveUserMessageConsumer {
 
     @KafkaListener(topics = "testuser", groupId = "group-user", containerFactory = "kafkaListenerUserContainerFactory")
     public void listenUser(User message) {
-        System.out.println("Received Messasge in group - group-user: " + message.toString());
+        System.out.println("Received Messasge in WaveUserMessageConsumer group - group-user: 66" + message.toString());
     }
 
 }
