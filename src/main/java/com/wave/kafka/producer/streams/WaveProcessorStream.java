@@ -10,7 +10,6 @@ import org.springframework.messaging.SubscribableChannel;
 public interface WaveProcessorStream {
 
     String INPUTUSERSTREAM = "inputuserstream";
-    String OUTPUTUSERSTREAM = "outputuserstream";
     String OUTPUTUSERSTREAMTEA = "outputuserstreamtea";
     String OUTPUTUSERSTREAMCOFFEE = "outputuserstreamcoffee";
 
@@ -31,11 +30,6 @@ public interface WaveProcessorStream {
 
     @Output(OUTPUTUSERSTREAMCOFFEE)
     KStream outputStreamcoffee();
-
-
-
-
-
 
 
 }

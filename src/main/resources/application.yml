@@ -21,6 +21,10 @@ spring:
           destination: outputuserstreamcoffee
           type: kstream
           contentType: application/json
+        outputuserstreamcombiner:
+          destination: outputuserstreamcombiner
+
+
         inputuserstream:
           destination: inputuserstream
           type: kstream
