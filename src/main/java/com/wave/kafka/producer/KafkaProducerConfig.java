@@ -1,6 +1,7 @@
 package com.wave.kafka.producer;
 
 
+import com.wave.kafka.model.User;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;

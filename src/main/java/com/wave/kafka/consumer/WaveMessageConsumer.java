@@ -1,4 +1,4 @@
-package com.wave.kafka.producer;
+package com.wave.kafka.consumer;
 
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;

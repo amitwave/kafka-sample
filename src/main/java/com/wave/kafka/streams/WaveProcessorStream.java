@@ -1,10 +1,8 @@
-package com.wave.kafka.producer.streams;
+package com.wave.kafka.streams;
 
 import org.apache.kafka.streams.kstream.KStream;
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.cloud.stream.annotation.Output;
-import org.springframework.messaging.MessageChannel;
-import org.springframework.messaging.SubscribableChannel;
 
 
 public interface WaveProcessorStream {

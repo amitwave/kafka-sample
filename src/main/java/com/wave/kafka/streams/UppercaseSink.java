@@ -1,18 +1,11 @@
-package com.wave.kafka.producer.streams;
+package com.wave.kafka.streams;
 
-import com.wave.kafka.producer.User;
-import org.apache.kafka.streams.kstream.KStream;
-import org.apache.kafka.streams.kstream.Printed;
-import org.springframework.beans.factory.annotation.Qualifier;
+import com.wave.kafka.model.User;
 import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.cloud.stream.annotation.StreamListener;
-import org.springframework.cloud.stream.messaging.Processor;
-import org.springframework.cloud.stream.messaging.Sink;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Component;
 
-import static com.wave.kafka.producer.streams.WaveProcessor.INPUTUSER;
+import static com.wave.kafka.streams.WaveProcessor.INPUTUSER;
 
 
 

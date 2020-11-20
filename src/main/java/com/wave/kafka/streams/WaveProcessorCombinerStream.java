@@ -1,4 +1,4 @@
-package com.wave.kafka.producer.streams;
+package com.wave.kafka.streams;
 
 import org.apache.kafka.streams.kstream.KStream;
 import org.springframework.cloud.stream.annotation.Input;

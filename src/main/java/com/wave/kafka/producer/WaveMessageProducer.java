@@ -1,19 +1,15 @@
 package com.wave.kafka.producer;
 
 
-import org.apache.kafka.common.serialization.Serdes;
-import org.apache.kafka.streams.StreamsBuilder;
-import org.apache.kafka.streams.kstream.KStream;
-import org.apache.kafka.streams.kstream.KTable;
+import com.wave.kafka.model.Preference;
+import com.wave.kafka.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Random;
-import java.util.regex.Pattern;
 
 @Component
 public class WaveMessageProducer {

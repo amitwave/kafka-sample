@@ -1,7 +1,7 @@
-package com.wave.kafka.producer.streams;
+package com.wave.kafka.streams;
 
-import com.wave.kafka.producer.Preference;
-import com.wave.kafka.producer.User;
+import com.wave.kafka.model.Preference;
+import com.wave.kafka.model.User;
 import org.apache.kafka.streams.kstream.KStream;
 import org.apache.kafka.streams.kstream.Predicate;
 import org.apache.kafka.streams.kstream.Printed;
@@ -10,9 +10,9 @@ import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Component;
 
-import static com.wave.kafka.producer.streams.WaveProcessorStream.INPUTUSERSTREAM;
-import static com.wave.kafka.producer.streams.WaveProcessorStream.OUTPUTUSERSTREAMTEA;
-import static com.wave.kafka.producer.streams.WaveProcessorStream.OUTPUTUSERSTREAMCOFFEE;
+import static com.wave.kafka.streams.WaveProcessorStream.INPUTUSERSTREAM;
+import static com.wave.kafka.streams.WaveProcessorStream.OUTPUTUSERSTREAMTEA;
+import static com.wave.kafka.streams.WaveProcessorStream.OUTPUTUSERSTREAMCOFFEE;
 
 
 //@EnableBinding(KStreamProcessor.class)

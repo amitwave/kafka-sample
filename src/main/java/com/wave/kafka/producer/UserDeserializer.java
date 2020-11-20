@@ -2,6 +2,7 @@ package com.wave.kafka.producer;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wave.kafka.model.User;
 import org.apache.kafka.common.serialization.Deserializer;
 
 import java.util.Map;

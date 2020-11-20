@@ -1,4 +1,4 @@
-package com.wave.kafka.producer;
+package com.wave.kafka.model;
 
 /**
  * Created by amit on 18/01/2020.

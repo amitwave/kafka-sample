@@ -1,23 +1,17 @@
-package com.wave.kafka.producer.streams;
+package com.wave.kafka.streams;
 
-import com.wave.kafka.producer.Preference;
-import com.wave.kafka.producer.User;
+import com.wave.kafka.model.User;
 import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.kstream.KStream;
-import org.apache.kafka.streams.kstream.Predicate;
-import org.apache.kafka.streams.kstream.Printed;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Component;
 
-import static com.wave.kafka.producer.streams.WaveProcessorCombinerStream.INPUTUSERSTREAMCOFFEE;
-import static com.wave.kafka.producer.streams.WaveProcessorCombinerStream.INPUTUSERSTREAMTEA;
-import static com.wave.kafka.producer.streams.WaveProcessorCombinerStream.OUTPUTUSERSTREAMCOMBINER;
-import static com.wave.kafka.producer.streams.WaveProcessorStream.*;
-
+import static com.wave.kafka.streams.WaveProcessorCombinerStream.INPUTUSERSTREAMCOFFEE;
+import static com.wave.kafka.streams.WaveProcessorCombinerStream.INPUTUSERSTREAMTEA;
+import static com.wave.kafka.streams.WaveProcessorCombinerStream.OUTPUTUSERSTREAMCOMBINER;
 
 
 @EnableBinding(WaveProcessorCombinerStream.class)
