@@ -16,8 +16,8 @@ import static com.wave.kafka.streams.WaveProcessorStream.OUTPUTUSERSTREAMCOFFEE;
 
 
 //@EnableBinding(KStreamProcessor.class)
-@EnableBinding(WaveProcessorStream.class)
-@Component
+//@EnableBinding(WaveProcessorStream.class)
+//@Component
 public class UppercaseStreamSink {
 
 

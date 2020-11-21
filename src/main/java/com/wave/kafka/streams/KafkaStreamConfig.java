@@ -25,9 +25,9 @@ import java.util.Map;
 
 import static org.springframework.kafka.annotation.KafkaStreamsDefaultConfiguration.DEFAULT_STREAMS_CONFIG_BEAN_NAME;
 
-@Configuration
-@EnableKafka
-@EnableKafkaStreams
+//@Configuration
+//@EnableKafka
+//@EnableKafkaStreams
 public class KafkaStreamConfig {
 
 

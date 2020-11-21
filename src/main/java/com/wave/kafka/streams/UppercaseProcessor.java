@@ -6,7 +6,7 @@ import org.springframework.cloud.stream.messaging.Processor;
 import org.springframework.messaging.handler.annotation.SendTo;
 
 
-@EnableBinding(Processor.class)
+//@EnableBinding(Processor.class)
 public class UppercaseProcessor {
 
     @StreamListener(Processor.INPUT)

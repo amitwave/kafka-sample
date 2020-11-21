@@ -13,8 +13,8 @@ import org.springframework.kafka.annotation.EnableKafkaStreams;
 
 
 //@EnableBinding(KafkaStreamsProcessor.class)
-@Configuration
-@EnableKafkaStreams
+//@Configuration
+//@EnableKafkaStreams
 public class UppercaseKafkaStreamProcessor {
 
     @Value("${kafka.topic.input}")

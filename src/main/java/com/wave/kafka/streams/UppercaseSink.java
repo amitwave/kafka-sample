@@ -10,8 +10,8 @@ import static com.wave.kafka.streams.WaveProcessor.INPUTUSER;
 
 
 //@EnableBinding(KStreamProcessor.class)
-@EnableBinding(WaveProcessor.class)
-@Component
+//@EnableBinding(WaveProcessor.class)
+//@Component
 public class UppercaseSink {
 
     @StreamListener("output")

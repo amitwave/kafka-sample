@@ -14,8 +14,8 @@ import static com.wave.kafka.streams.WaveProcessorCombinerStream.INPUTUSERSTREAM
 import static com.wave.kafka.streams.WaveProcessorCombinerStream.OUTPUTUSERSTREAMCOMBINER;
 
 
-@EnableBinding(WaveProcessorCombinerStream.class)
-@Component
+//@EnableBinding(WaveProcessorCombinerStream.class)
+//@Component
 public class UserStreamCombiner {
 
 
