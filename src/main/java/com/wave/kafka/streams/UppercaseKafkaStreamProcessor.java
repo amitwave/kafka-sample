@@ -13,19 +13,17 @@ import org.springframework.kafka.annotation.EnableKafkaStreams;
 
 
 //@EnableBinding(KafkaStreamsProcessor.class)
-//@Configuration
-//@EnableKafkaStreams
+@Configuration
+@EnableKafkaStreams
 public class UppercaseKafkaStreamProcessor {
 
-    @Value("${kafka.topic.input}")
-    private String inputTopic;
+    private String inputTopic = "input";
 
-    @Value("${kafka.topic.output}")
-    private String outputTopic;
+    private String outputTopic= "outputStream";
 
     @Bean
     public KStream<String, String> kStream(@Qualifier("defaultKafkaStreamsBuilder") StreamsBuilder kStreamBuilder) {
-        System.out.println("in the sink 33:: ");
+        System.out.println("Stream:: in the sink 33:: ");
 
 
         KStream<String, String> stream = kStreamBuilder.stream(inputTopic);
@@ -49,7 +47,7 @@ public class UppercaseKafkaStreamProcessor {
    // @SendTo("output")
    // @Bean
     public KStream<String, String> kStream1(@Qualifier("defaultKafkaStreamsBuilder") KStream<String, String> kStream) {
-        System.out.println("in the sink 22:: ");
+        System.out.println("Stream:: in the sink 22:: ");
        /* stream.mapValues(v -> {
             System.out.println("Processing Stream :: " + v);
             return v.toUpperCase();
@@ -65,7 +63,7 @@ public class UppercaseKafkaStreamProcessor {
 
     @Bean
     public KStream<String, String>  kSink(@Qualifier("defaultKafkaStreamsBuilder") StreamsBuilder kStreamBuilder) {
-        System.out.println("in the sink 11:: ");
+        System.out.println("Stream:: in the sink 11:: ");
         KStream<String, String> stream = kStreamBuilder.stream(outputTopic);
 
 
@@ -85,9 +83,9 @@ public class UppercaseKafkaStreamProcessor {
     //@StreamListener("input")
     //@SendTo("outputuser")
   //  @Bean("userstream")
-    public KStream<String, User>  userstream(@Qualifier("customStreamBuilder") StreamsBuilder kStreamBuilder) {
+    public KStream<String, User>  userStream(@Qualifier("customStreamBuilder") StreamsBuilder kStreamBuilder) {
 
-        System.out.println("in the sink 333:: ");
+        System.out.println("Stream:: in the sink 333:: ");
         KStream<String, User> stream = kStreamBuilder.stream("inputuserstream");
 
 

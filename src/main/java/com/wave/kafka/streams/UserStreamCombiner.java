@@ -18,13 +18,12 @@ import static com.wave.kafka.streams.WaveProcessorCombinerStream.OUTPUTUSERSTREA
 //@Component
 public class UserStreamCombiner {
 
-
-
     @StreamListener
     @SendTo(OUTPUTUSERSTREAMCOMBINER)
     public KStream<String, User> handle1(@Input(INPUTUSERSTREAMTEA)KStream<String, User> teaStream,
                                          @Input(INPUTUSERSTREAMCOFFEE)KStream<String, User> coffeeStream) {
 
+        System.out.println("Stream:: UserStreamCombiner teaStream = " + teaStream + ", coffeeStream = " + coffeeStream);
 
         KStream<String, User> combinedStream =  teaStream.merge(coffeeStream);
 

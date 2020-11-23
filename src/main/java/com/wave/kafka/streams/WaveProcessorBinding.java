@@ -6,7 +6,7 @@ import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.SubscribableChannel;
 
 
-public interface WaveProcessor {
+public interface WaveProcessorBinding {
 
     String INPUTUSER = "inputuser";
 
@@ -14,10 +14,10 @@ public interface WaveProcessor {
 
 
     @Input(INPUTUSER)
-    SubscribableChannel myInput();
+    SubscribableChannel inputuser();
 
     @Output(OUTPUTUSER)
-    MessageChannel anOutput();
+    MessageChannel outputuser();
 
 
 }

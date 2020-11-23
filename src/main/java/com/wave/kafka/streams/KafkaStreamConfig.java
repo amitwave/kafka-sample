@@ -25,23 +25,23 @@ import java.util.Map;
 
 import static org.springframework.kafka.annotation.KafkaStreamsDefaultConfiguration.DEFAULT_STREAMS_CONFIG_BEAN_NAME;
 
-//@Configuration
+@Configuration
 //@EnableKafka
-//@EnableKafkaStreams
+@EnableKafkaStreams
 public class KafkaStreamConfig {
 
 
 
     @Autowired
-    private KafkaProperties kafkaProperties;
+    private KafkaProperties kafkaProperties; // picks up properties from yaml
 
     @Primary
     //@Bean(name = "defaultKafkaStreams")
     @Bean(name = DEFAULT_STREAMS_CONFIG_BEAN_NAME)
-    public KafkaStreamsConfiguration kStreamsConfigs(KafkaProperties kafkaProperties) {
+    public KafkaStreamsConfiguration kStreamsConfigs() {
         Map<String, Object> config = new HashMap<>();
-        config.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProperties.getBootstrapServers());
-        config.put(StreamsConfig.APPLICATION_ID_CONFIG, kafkaProperties.getClientId());
+        config.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        config.put(StreamsConfig.APPLICATION_ID_CONFIG, "kafka-stream-default");
         config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());
         config.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass());
         return new KafkaStreamsConfiguration(config);
@@ -57,20 +57,20 @@ public class KafkaStreamConfig {
     }
 
     @Bean("defaultStreamsConfig")
-    public Map<String, Object> defaultStreamsConfig(KafkaProperties kafkaProperties) {
+    public Map<String, Object> defaultStreamsConfig() {
         Map<String, Object> config = new HashMap<>();
-        config.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProperties.getBootstrapServers());
-        config.put(StreamsConfig.APPLICATION_ID_CONFIG, kafkaProperties.getClientId());
+        config.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        config.put(StreamsConfig.APPLICATION_ID_CONFIG, "kafka-stream-default1");
         config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());
         config.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass());
         return config;
     }
 
     @Bean("userStreamsConfig")
-    public Map<String, Object> userStreamsConfig(KafkaProperties kafkaProperties) {
+    public Map<String, Object> userStreamsConfig() {
         Map<String, Object> config = new HashMap<>();
-        config.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProperties.getBootstrapServers());
-        config.put(StreamsConfig.APPLICATION_ID_CONFIG, kafkaProperties.getClientId()+1);
+        config.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        config.put(StreamsConfig.APPLICATION_ID_CONFIG, "kafka-stream-user");
         config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());
         config.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.serdeFrom(new UserSerialiser(), new UserDeserializer()).getClass());
         return config;
@@ -78,13 +78,13 @@ public class KafkaStreamConfig {
 
 
     @Bean(name = "customStreamBuilder")
-    public FactoryBean<StreamsBuilder> customStreamBuilder(@Qualifier("userStreamsConfig") Map<String, Object> config,
+    public FactoryBean<StreamsBuilder> customStreamBuilder(
             @Qualifier(DEFAULT_STREAMS_CONFIG_BEAN_NAME)
                     ObjectProvider<KafkaStreamsConfiguration> streamsConfigProvider,
             ObjectProvider<StreamsBuilderFactoryBeanCustomizer> customizerProvider) {
-
-        config.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProperties.getBootstrapServers());
-        config.put(StreamsConfig.APPLICATION_ID_CONFIG, "my-app");
+        Map<String, Object> config = new HashMap<>();
+        config.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        config.put(StreamsConfig.APPLICATION_ID_CONFIG, "kafka-stream-custom");
         config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());
         config.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.serdeFrom(new UserSerialiser(), new UserDeserializer()).getClass());
 

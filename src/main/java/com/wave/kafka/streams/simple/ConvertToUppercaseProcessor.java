@@ -1,4 +1,4 @@
-package com.wave.kafka.streams;
+package com.wave.kafka.streams.simple;
 
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
@@ -6,13 +6,13 @@ import org.springframework.cloud.stream.messaging.Processor;
 import org.springframework.messaging.handler.annotation.SendTo;
 
 
-//@EnableBinding(Processor.class)
-public class UppercaseProcessor {
+@EnableBinding(UpperCaseProcessorBinder.class)
+public class ConvertToUppercaseProcessor {
 
-    @StreamListener(Processor.INPUT)
-    @SendTo(Processor.OUTPUT)
+    @StreamListener("input")
+    @SendTo("outputUpperCase")
     public String process(String s) {
-        System.out.println("In the UppercaseProcessor 22 " + s);
+        System.out.println("Stream:: In the UppercaseProcessor 22 " + s);
         return s.toUpperCase();
     }
 

@@ -7,6 +7,7 @@ import org.apache.kafka.streams.kstream.Predicate;
 import org.apache.kafka.streams.kstream.Printed;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
+import org.springframework.cloud.stream.binder.kstream.annotations.KStreamProcessor;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Component;
 
@@ -16,9 +17,9 @@ import static com.wave.kafka.streams.WaveProcessorStream.OUTPUTUSERSTREAMCOFFEE;
 
 
 //@EnableBinding(KStreamProcessor.class)
-//@EnableBinding(WaveProcessorStream.class)
-//@Component
-public class UppercaseStreamSink {
+@EnableBinding(WaveProcessorStream.class)
+@Component
+public class UserStreamBrancher {
 
 
     Predicate<String, User> isTea = (k, v) -> v.getPreference().equals(Preference.TEA);
@@ -28,7 +29,7 @@ public class UppercaseStreamSink {
     @SendTo({OUTPUTUSERSTREAMTEA, OUTPUTUSERSTREAMCOFFEE})
     public KStream<String, User>[] handle1(KStream<String, User> kSink) {
 
-        System.out.println("In the UppercaseSink SINK  handle1 kSink1" );
+        System.out.println("Stream:: In the StreamBrancher SINK  handle1 kSink1" );
         kSink.print(Printed.toSysOut());
 
         return kSink.branch(isTea, isCoffee);

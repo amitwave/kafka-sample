@@ -1,35 +1,4 @@
-spring:
-  cloud:
-    stream:
-      bindings:
-        input:
-          destination: input
-        output:
-          destination: output
-        outputuser:
-          destination: outputuser
-        inputuser:
-          destination: inputuser
-        outputuserstream:
-          destination: outputuserstream
-          type: kstream
-        outputuserstreamtea:
-          destination: outputuserstreamtea
-          type: kstream
-          contentType: application/json
-        outputuserstreamcoffee:
-          destination: outputuserstreamcoffee
-          type: kstream
-          contentType: application/json
-        outputuserstreamcombiner:
-          destination: outputuserstreamcombiner
 
-
-        inputuserstream:
-          destination: inputuserstream
-          type: kstream
-        output-sink:
-          destination: output
 
 server:
   servlet:
