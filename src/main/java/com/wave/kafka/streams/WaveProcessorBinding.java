@@ -17,17 +17,17 @@ public interface WaveProcessorBinding {
     String INPUTSTREAMSTRING1 = "inputStreamString1";
 
 
-    @Input(INPUTUSER)
-    SubscribableChannel myInput();
+    @Input
+    SubscribableChannel inputuser();
 
     @Output(OUTPUTUSER)
-    MessageChannel anOutput();
+    MessageChannel outputuser();
 
-    @Input(INPUTSTREAMSTRING)
+    @Input
     SubscribableChannel inputStreamString();
 
     @Input(INPUTSTREAMSTRING1)
-    MessageChannel inputStreamString1();
+    SubscribableChannel inputStreamString1();
 
   //  @Output(INPUTSTREAMSTRING)
    // MessageChannel outputStreamString();
