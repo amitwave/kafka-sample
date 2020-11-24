@@ -50,6 +50,7 @@ public class WaveMessageProducer {
         });
         kafkaTemplate.send("test", "key"+msg.hashCode(), msg);
         kafkaTemplate.send("input", "key"+msg.hashCode(), msg);
+        kafkaTemplate.send("inputStreamString", "key"+msg.hashCode(), msg);
 
         User user = new User();
         user.setId(new Random().nextInt());
@@ -60,9 +61,6 @@ public class WaveMessageProducer {
         kafkaUserTemplate.send("testuser", user.getId().toString(), user);
         kafkaUserTemplate.send("inputuser", user.getId().toString(), user);
         kafkaUserTemplate.send("inputuserstream", user.getId().toString(), user);
-
-
-
     }
 
 

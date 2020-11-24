@@ -18,7 +18,7 @@ import static com.wave.kafka.streams.WaveProcessorStream.OUTPUTUSERSTREAMCOFFEE;
 //@EnableBinding(KStreamProcessor.class)
 //@EnableBinding(WaveProcessorStream.class)
 //@Component
-public class UppercaseStreamSink {
+public class UserDataSplitter {
 
 
     Predicate<String, User> isTea = (k, v) -> v.getPreference().equals(Preference.TEA);

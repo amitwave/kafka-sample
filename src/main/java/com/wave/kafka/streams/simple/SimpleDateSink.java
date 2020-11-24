@@ -1,20 +1,19 @@
-package com.wave.kafka.streams;
+package com.wave.kafka.streams.simple;
 
 import com.wave.kafka.model.User;
+import com.wave.kafka.streams.WaveProcessorBinding;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.stereotype.Component;
 
-import static com.wave.kafka.streams.WaveProcessor.INPUTUSER;
-
+import static com.wave.kafka.streams.WaveProcessorBinding.*;
 
 
 //@EnableBinding(KStreamProcessor.class)
-//@EnableBinding(WaveProcessor.class)
-//@Component
-public class UppercaseSink {
-
-    @StreamListener("output")
+@EnableBinding(WaveProcessorBinding.class)
+@Component
+public class SimpleDateSink {
+    @StreamListener(INPUTSTREAMSTRING)
     public void handle(String s) {
         System.out.println("In the UppercaseSink SINK  88 " + s);
 
