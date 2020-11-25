@@ -7,7 +7,6 @@ import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.kstream.KStream;
 import org.apache.kafka.streams.kstream.Printed;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,9 +36,9 @@ public class KafkaStreamProducerConfig {
         })
                 .to(outputTopic);*/
 
-        stream.map((k,v) ->
-            new KeyValue<>(k, new String("Stream-amit  " + v).toUpperCase())
-        ).to("inputStreamString");
+        stream.map((k, v) ->
+                new KeyValue<>(k, new String("Stream-amit  " + v).toUpperCase())
+        ).to("inputStreamStringBuilder");
 
 
         return stream;
