@@ -27,19 +27,20 @@ public class SimpleStreamStringListener {
                 new KeyValue<>(k.toUpperCase() + "-key", new String("Stream-8811-  " + v).toUpperCase())
         );
 //       System.out.println("===SimpleStreamStringListener.handle");
+        stringStream.print(Printed.toSysOut());
         ss.print(Printed.toSysOut());
 //       System.out.println("====/SimpleStreamStringListener.handle");
         return ss;
     }
 
-    @StreamListener//(INPUTSTREAMSTRINGBUILDER)
+    @StreamListener(INPUTSTREAMSTRING1)
     //@SendTo(INPUTSTREAMSTRING1)
     public void handle1(@Input(INPUTSTREAMSTRING1) KStream<String, String> stringStream) {
         System.out.println("Stream:: In the UppercaseSink SINK  8812 ");
-
-        stringStream.print(Printed.toSysOut());
-
-
+        KStream<String, String> ss = stringStream.map((k, v) ->
+                new KeyValue<>(k.toUpperCase() + "-final", new String("Stream-8812-  " + v).toUpperCase())
+        );
+        ss.print(Printed.toSysOut());
     }
 
 }

@@ -5,33 +5,28 @@ import com.wave.kafka.model.User;
 import org.apache.kafka.streams.kstream.KStream;
 import org.apache.kafka.streams.kstream.Predicate;
 import org.apache.kafka.streams.kstream.Printed;
+import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.cloud.stream.annotation.StreamListener;
-import org.springframework.messaging.handler.annotation.SendTo;
 
-import static com.wave.kafka.streams.user.UserProcessorBinding.*;
+import static com.wave.kafka.streams.user.UserProcessorBinding.OUTPUTUSERSTREAM;
 
-
-//@EnableBinding(KStreamProcessor.class)
-//@EnableBinding(WaveProcessorStream.class)
-//@Component
+//@EnableBinding(UserProcessorBinding.class)
 public class UserDataSplitter {
 
 
     Predicate<String, User> isTea = (k, v) -> v.getPreference().equals(Preference.TEA);
-    Predicate<String, User> isCoffee =  (k, v) -> v.getPreference().equals(Preference.COFFEE);
+    Predicate<String, User> isCoffee = (k, v) -> v.getPreference().equals(Preference.COFFEE);
 
-    @StreamListener(INPUTUSERSTREAM)
-    @SendTo({OUTPUTUSERSTREAMTEA, OUTPUTUSERSTREAMCOFFEE})
-    public KStream<String, User>[] handle1(KStream<String, User> kSink) {
+    @StreamListener(OUTPUTUSERSTREAM)
+    //@SendTo({OUTPUTUSERSTREAMTEA, OUTPUTUSERSTREAMCOFFEE})
+    public KStream<String, User>[] handle1(@Input(OUTPUTUSERSTREAM) KStream<String, User> kSink) {
 
-        System.out.println("In the UppercaseSink SINK  handle1 kSink1" );
+        System.out.println("In the UppercaseSink SINK  handle1 kSink1");
         kSink.print(Printed.toSysOut());
 
         return kSink.branch(isTea, isCoffee);
 
-
-
-      //  return kSink;
+        //  return kSink;
 
     }
 

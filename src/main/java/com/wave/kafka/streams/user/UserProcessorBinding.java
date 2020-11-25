@@ -7,17 +7,35 @@ import org.springframework.cloud.stream.annotation.Output;
 
 public interface UserProcessorBinding {
 
-    String INPUTUSERSTREAM = "inputuserstream";
+    //  String INPUTUSERSTREAM = "inputuserstream";
+    String OUTPUTUSERSTREAM = "outputuserstream";
+
     String OUTPUTUSERSTREAMTEA = "outputuserstreamtea";
     String OUTPUTUSERSTREAMCOFFEE = "outputuserstreamcoffee";
 
+    String OUTPUTUSERSTREAMCOMBINER = "outputuserstreamcombiner";
 
-    @Input(INPUTUSERSTREAM)
-    KStream inputStream();
+    String INPUTUSERSTREAMTEA = "outputuserstreamtea";
+    String INPUTUSERSTREAMCOFFEE = "outputuserstreamcoffee";
+
+    @Output(OUTPUTUSERSTREAMCOMBINER)
+    KStream outputuserstreamcombiner();
 
 
-   // @Output(OUTPUTUSERSTREAM)
-  //  KStream outputStream();
+    @Input(INPUTUSERSTREAMTEA)
+    KStream outputuserstreamtea();
+
+
+    @Input(INPUTUSERSTREAMCOFFEE)
+    KStream outputuserstreamcoffee();
+
+    /*
+        @Input(INPUTUSERSTREAM)
+        KStream inputStream();
+
+    */
+    @Input(OUTPUTUSERSTREAM)
+    KStream outputStream();
 
 
     @Output(OUTPUTUSERSTREAMTEA)

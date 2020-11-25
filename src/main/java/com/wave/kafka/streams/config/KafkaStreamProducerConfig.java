@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafkaStreams;
 
 import static com.wave.kafka.streams.simple.SimpleProcessorBinding.INPUTSTREAMSTRINGBUILDER;
+import static com.wave.kafka.streams.user.UserProcessorBinding.OUTPUTUSERSTREAM;
 
 
 //@EnableBinding(WaveProcessorBinding.class)
@@ -29,12 +30,6 @@ public class KafkaStreamProducerConfig {
 
         KStream<String, String> stream = kStreamBuilder.stream(inputTopic);
 
-
-       /* stream.mapValues(v -> {
-            System.out.println("Processing Stream :: " + v);
-            return v.toUpperCase();
-        })
-                .to(outputTopic);*/
 
         stream.map((k, v) ->
                 new KeyValue<>(k, new String("Stream-amit  " + v).toUpperCase())
@@ -63,7 +58,7 @@ public class KafkaStreamProducerConfig {
         return kStream;
     }
 
-    @Bean
+    //  @Bean
     public KStream<String, String>  kSink(@Qualifier("defaultKafkaStreamsBuilder") StreamsBuilder kStreamBuilder) {
         System.out.println("in the sink 11:: ");
         KStream<String, String> stream = kStreamBuilder.stream(outputTopic);
@@ -84,7 +79,7 @@ public class KafkaStreamProducerConfig {
 
     //@StreamListener("input")
     //@SendTo("outputuser")
-    @Bean("userstream")
+    @Bean//("userstream")
     public KStream<String, User>  userstream(@Qualifier("customStreamBuilder") StreamsBuilder kStreamBuilder) {
 
         System.out.println("in the sink 333:: ");
@@ -93,13 +88,13 @@ public class KafkaStreamProducerConfig {
 
 
         System.out.println("in the user Sink 333 :: ");
-        stream.print(Printed.toSysOut());
+        //  stream.print(Printed.toSysOut());
 
 
         stream.mapValues(v -> {
             System.out.println("IN the Sink Stream 333:: " + v);
             return v;
-        }).to("outputuserstream");
+        }).to(OUTPUTUSERSTREAM);
         return stream;
     }
 

@@ -30,6 +30,6 @@ public interface SimpleProcessorBinding {
     @Input(INPUTSTREAMSTRINGBUILDER)
     KStream<String, String> inputStreamStringBuilder();
 
-    @Output(INPUTSTREAMSTRING1)
+    @Input(INPUTSTREAMSTRING1)
     KStream<String, String> outputStreamString();
 }
