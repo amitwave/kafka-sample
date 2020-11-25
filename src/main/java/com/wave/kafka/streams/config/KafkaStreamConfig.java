@@ -2,11 +2,9 @@ package com.wave.kafka.streams.config;
 
 import com.wave.kafka.producer.UserDeserializer;
 import com.wave.kafka.producer.UserSerialiser;
-import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.StreamsConfig;
-import org.apache.kafka.streams.processor.FailOnInvalidTimestamp;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.UnsatisfiedDependencyException;
@@ -17,7 +15,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.kafka.annotation.EnableKafkaStreams;
-import org.springframework.kafka.annotation.KafkaStreamsDefaultConfiguration;
 import org.springframework.kafka.config.KafkaStreamsConfiguration;
 import org.springframework.kafka.config.StreamsBuilderFactoryBean;
 import org.springframework.kafka.config.StreamsBuilderFactoryBeanCustomizer;
@@ -37,30 +34,24 @@ public class KafkaStreamConfig {
     @Autowired
     private KafkaProperties kafkaProperties; // picks up properties from yaml
 
-   // @Bean(name = KafkaStreamsDefaultConfiguration.DEFAULT_STREAMS_CONFIG_BEAN_NAME)
-    public StreamsConfig kStreamsConfigs() {
-        Map<String, Object> config = new HashMap<>();
-        config.put(StreamsConfig.APPLICATION_ID_CONFIG, "default");
-        setDefaults(config);
-        return new StreamsConfig(config);
-    }
-
-    public void setDefaults(Map<String, Object> config) {
-        config.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-        config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());
-        config.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass());
-        config.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
-        config.put(StreamsConfig.DEFAULT_TIMESTAMP_EXTRACTOR_CLASS_CONFIG, FailOnInvalidTimestamp.class);
-    }
-
     @Primary
+    //@Bean(name = "defaultKafkaStreams")
     @Bean(name = DEFAULT_STREAMS_CONFIG_BEAN_NAME)
-    public KafkaStreamsConfiguration kStreamsConfigs1() {
+    public KafkaStreamsConfiguration kStreamsConfigs() {
         Map<String, Object> config = new HashMap<>();
         config.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         config.put(StreamsConfig.APPLICATION_ID_CONFIG, "kafka-stream-default");
         config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());
         config.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass());
+        return new KafkaStreamsConfiguration(config);
+    }
+
+   // @Primary
+    //@Bean(name = "defaultKafkaStreams")
+   // @Bean(name = DEFAULT_STREAMS_CONFIG_BEAN_NAME)
+    public KafkaStreamsConfiguration kStreamsConfigs1(@Qualifier("defaultStreamsConfig") Map<String, Object> config) {
+      //  Map<String, Object> config = defaultStreamsConfig();
+       // config.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.serdeFrom(new UserSerialiser(), new UserDeserializer()).getClass());
         return new KafkaStreamsConfiguration(config);
     }
 

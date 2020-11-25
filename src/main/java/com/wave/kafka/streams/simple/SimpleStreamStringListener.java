@@ -14,17 +14,19 @@ import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Component;
 
-import static com.wave.kafka.streams.WaveProcessorBinding.*;
+import static com.wave.kafka.streams.WaveProcessorBinding.INPUTSTREAMSTRING;
+import static com.wave.kafka.streams.WaveProcessorBinding.INPUTSTREAMSTRING1;
 import static com.wave.kafka.streams.WaveProcessorCombinerStream.INPUTUSERSTREAMTEA;
 
-@EnableBinding(WaveProcessorBinding.class)
-@Component
+//@EnableKafkaStreams
+//@EnableBinding(WaveProcessorBinding.class)
+//@Component
 public class SimpleStreamStringListener {
 
 
-   @StreamListener(INPUTSTREAMSTRING11)
-   @SendTo("outputStreamString")
-    public KStream<String, String>  handle(KStream<String, String> stringStream) {
+   @StreamListener(INPUTSTREAMSTRING)
+   @SendTo(INPUTSTREAMSTRING1)
+    public KStream<String, String>  handle(@Input("inputStreamString") KStream<String, String> stringStream) {
         System.out.println("Stream:: In the UppercaseSink SINK  8811 ");
 
         stringStream.print(Printed.toSysOut());

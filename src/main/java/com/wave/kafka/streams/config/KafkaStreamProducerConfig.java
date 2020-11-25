@@ -9,24 +9,21 @@ import org.apache.kafka.streams.kstream.Printed;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafkaStreams;
 
-import static com.wave.kafka.streams.WaveProcessorBinding.INPUTSTREAMSTRING11;
 
-
-//@EnableBinding(WaveProcessorBinding.class)
+@EnableBinding(WaveProcessorBinding.class)
 @Configuration
-//@EnableKafkaStreams
+@EnableKafkaStreams
 public class KafkaStreamProducerConfig {
 
     private String inputTopic = "input";
 
-    //private String outputTopic= "outputString";
+    private String outputTopic= "outputString";
 
-    @Bean("defaultStreamTopology")
+    @Bean
     public KStream<String, String> kStream(@Qualifier("defaultKafkaStreamsBuilder") StreamsBuilder kStreamBuilder) {
         System.out.println("in the sink 33:: ");
 
@@ -42,7 +39,7 @@ public class KafkaStreamProducerConfig {
 
         stream.map((k,v) ->
             new KeyValue<>(k, new String("Stream-amit  " + v).toUpperCase())
-        ).to(INPUTSTREAMSTRING11);
+        ).to("inputStreamString");
 
 
         return stream;
@@ -67,7 +64,7 @@ public class KafkaStreamProducerConfig {
         return kStream;
     }
 
-   /* @Bean
+    @Bean
     public KStream<String, String>  kSink(@Qualifier("defaultKafkaStreamsBuilder") StreamsBuilder kStreamBuilder) {
         System.out.println("in the sink 11:: ");
         KStream<String, String> stream = kStreamBuilder.stream(outputTopic);
@@ -84,7 +81,7 @@ public class KafkaStreamProducerConfig {
         });
         return stream;
     }
-*/
+
 
     //@StreamListener("input")
     //@SendTo("outputuser")
