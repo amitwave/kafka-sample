@@ -29,8 +29,6 @@ import static org.springframework.kafka.annotation.KafkaStreamsDefaultConfigurat
 @EnableKafkaStreams
 public class KafkaStreamConfig {
 
-
-
     @Autowired
     private KafkaProperties kafkaProperties; // picks up properties from yaml
 
