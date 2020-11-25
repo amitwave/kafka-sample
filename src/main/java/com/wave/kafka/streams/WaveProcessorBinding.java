@@ -14,6 +14,7 @@ public interface WaveProcessorBinding {
     String OUTPUTUSER = "outputuser";
 
     String INPUTSTREAMSTRING = "inputStreamString";
+    String INPUTSTREAMSTRINGBUILDER = "inputStreamStringBuilder";
     String INPUTSTREAMSTRING1 = "inputStreamString1";
 
 
@@ -26,9 +27,9 @@ public interface WaveProcessorBinding {
     @Input
     SubscribableChannel inputStreamString();
 
-    @Input(INPUTSTREAMSTRING1)
-    SubscribableChannel inputStreamString1();
+    @Input(INPUTSTREAMSTRINGBUILDER)
+    KStream<String, String> inputStreamStringBuilder();
 
-  //  @Output(INPUTSTREAMSTRING)
-   // MessageChannel outputStreamString();
+    @Output(INPUTSTREAMSTRING1)
+    KStream<String, String> outputStreamString();
 }

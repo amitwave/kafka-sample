@@ -73,6 +73,37 @@ public class KafkaStreamConfig {
         return config;
     }
 
+    @Bean(name = "customStreamBuilder1")
+    public FactoryBean<StreamsBuilder> customStreamBuilder1(
+            @Qualifier(DEFAULT_STREAMS_CONFIG_BEAN_NAME)
+                    ObjectProvider<KafkaStreamsConfiguration> streamsConfigProvider,
+            ObjectProvider<StreamsBuilderFactoryBeanCustomizer> customizerProvider) {
+        Map<String, Object> config = new HashMap<>();
+        config.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        config.put(StreamsConfig.APPLICATION_ID_CONFIG, "kafka-stream-custom");
+        config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());
+        config.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass());
+
+
+        KafkaStreamsConfiguration streamsConfig = new KafkaStreamsConfiguration(config);
+        if (streamsConfig != null) {
+            //streamsConfig.asProperties().setProperty(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.serdeFrom(new UserSerialiser(), new UserDeserializer()).getClass()));
+            StreamsBuilderFactoryBean fb = new StreamsBuilderFactoryBean(streamsConfig);
+            StreamsBuilderFactoryBeanCustomizer customizer = customizerProvider.getIfUnique();
+            if (customizer != null) {
+                customizer.configure(fb);
+            }
+
+
+            return fb;
+        } else {
+            throw new UnsatisfiedDependencyException(KafkaStreamConfig.class.getName(),
+                    "customStreamBuilder", "streamsConfig", "There is no '" +
+                    DEFAULT_STREAMS_CONFIG_BEAN_NAME + "' " + KafkaStreamConfig.class.getName() +
+                    " bean in the application context.\n" +
+                    "Consider declaring one or don't use @EnableKafkaStreams.");
+        }
+    }
 
     @Bean(name = "customStreamBuilder")
     public FactoryBean<StreamsBuilder> customStreamBuilder(
