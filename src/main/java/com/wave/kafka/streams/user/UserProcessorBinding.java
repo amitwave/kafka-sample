@@ -1,17 +1,15 @@
-package com.wave.kafka.streams;
+package com.wave.kafka.streams.user;
 
 import org.apache.kafka.streams.kstream.KStream;
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.cloud.stream.annotation.Output;
 
 
-public interface WaveProcessorStream {
+public interface UserProcessorBinding {
 
     String INPUTUSERSTREAM = "inputuserstream";
     String OUTPUTUSERSTREAMTEA = "outputuserstreamtea";
     String OUTPUTUSERSTREAMCOFFEE = "outputuserstreamcoffee";
-
-
 
 
     @Input(INPUTUSERSTREAM)

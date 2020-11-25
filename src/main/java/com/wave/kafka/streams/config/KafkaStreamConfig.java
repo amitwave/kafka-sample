@@ -81,8 +81,8 @@ public class KafkaStreamConfig {
         Map<String, Object> config = new HashMap<>();
         config.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         config.put(StreamsConfig.APPLICATION_ID_CONFIG, "kafka-stream-custom");
-        config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());
-        config.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass());
+        config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.serdeFrom(String.class).getClass());
+        config.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.serdeFrom(String.class).getClass());
 
 
         KafkaStreamsConfiguration streamsConfig = new KafkaStreamsConfiguration(config);

@@ -1,6 +1,5 @@
 package com.wave.kafka.streams.simple;
 
-import com.wave.kafka.streams.WaveProcessorBinding;
 import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.kstream.KStream;
 import org.apache.kafka.streams.kstream.Printed;
@@ -10,11 +9,11 @@ import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Component;
 
-import static com.wave.kafka.streams.WaveProcessorBinding.INPUTSTREAMSTRING1;
-import static com.wave.kafka.streams.WaveProcessorBinding.INPUTSTREAMSTRINGBUILDER;
+import static com.wave.kafka.streams.simple.SimpleProcessorBinding.INPUTSTREAMSTRING1;
+import static com.wave.kafka.streams.simple.SimpleProcessorBinding.INPUTSTREAMSTRINGBUILDER;
 
 //@EnableKafkaStreams
-@EnableBinding(WaveProcessorBinding.class)
+@EnableBinding(SimpleProcessorBinding.class)
 @Component
 public class SimpleStreamStringListener {
 

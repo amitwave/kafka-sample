@@ -1,14 +1,13 @@
 package com.wave.kafka.streams.simple;
 
 import com.wave.kafka.model.User;
-import com.wave.kafka.streams.WaveProcessorBinding;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.SendTo;
 
-import static com.wave.kafka.streams.WaveProcessorBinding.*;
+import static com.wave.kafka.streams.simple.SimpleProcessorBinding.*;
 
-@EnableBinding(WaveProcessorBinding.class)
+@EnableBinding(SimpleProcessorBinding.class)
 public class SimpleDateSink {
     @StreamListener(INPUTSTREAMSTRING)
     public void handle(String s) {

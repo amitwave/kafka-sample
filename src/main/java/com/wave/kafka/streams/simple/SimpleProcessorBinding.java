@@ -1,4 +1,4 @@
-package com.wave.kafka.streams;
+package com.wave.kafka.streams.simple;
 
 import org.apache.kafka.streams.kstream.KStream;
 import org.springframework.cloud.stream.annotation.Input;
@@ -7,7 +7,7 @@ import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.SubscribableChannel;
 
 
-public interface WaveProcessorBinding {
+public interface SimpleProcessorBinding {
 
     String INPUTUSER = "inputuser";
 

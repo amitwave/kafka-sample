@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafkaStreams;
 
-import static com.wave.kafka.streams.WaveProcessorBinding.INPUTSTREAMSTRINGBUILDER;
+import static com.wave.kafka.streams.simple.SimpleProcessorBinding.INPUTSTREAMSTRINGBUILDER;
 
 
 //@EnableBinding(WaveProcessorBinding.class)
@@ -84,7 +84,7 @@ public class KafkaStreamProducerConfig {
 
     //@StreamListener("input")
     //@SendTo("outputuser")
-  //  @Bean("userstream")
+    @Bean("userstream")
     public KStream<String, User>  userstream(@Qualifier("customStreamBuilder") StreamsBuilder kStreamBuilder) {
 
         System.out.println("in the sink 333:: ");

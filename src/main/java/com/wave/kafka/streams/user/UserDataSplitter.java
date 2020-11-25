@@ -1,18 +1,14 @@
-package com.wave.kafka.streams;
+package com.wave.kafka.streams.user;
 
 import com.wave.kafka.model.Preference;
 import com.wave.kafka.model.User;
 import org.apache.kafka.streams.kstream.KStream;
 import org.apache.kafka.streams.kstream.Predicate;
 import org.apache.kafka.streams.kstream.Printed;
-import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.stereotype.Component;
 
-import static com.wave.kafka.streams.WaveProcessorStream.INPUTUSERSTREAM;
-import static com.wave.kafka.streams.WaveProcessorStream.OUTPUTUSERSTREAMTEA;
-import static com.wave.kafka.streams.WaveProcessorStream.OUTPUTUSERSTREAMCOFFEE;
+import static com.wave.kafka.streams.user.UserProcessorBinding.*;
 
 
 //@EnableBinding(KStreamProcessor.class)
