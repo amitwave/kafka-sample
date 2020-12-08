@@ -14,6 +14,8 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 import java.util.Random;
 
+import static com.wave.kafka.streams.simple.SimpleProcessorBinding.SIMPLE_INPUTSTREAMSTRING;
+
 @Component
 public class WaveMessageProducer {
 
@@ -48,15 +50,16 @@ public class WaveMessageProducer {
 
             }
         });
-        kafkaTemplate.send("test", "key"+msg.hashCode(), msg);
-        kafkaTemplate.send("input", "key"+msg.hashCode(), msg);
-        kafkaTemplate.send("inputStreamString", "key"+msg.hashCode(), msg);
+        kafkaTemplate.send("test", "key" + msg.hashCode(), msg);
+        kafkaTemplate.send("input", "key" + msg.hashCode(), msg);
+        kafkaTemplate.send(SIMPLE_INPUTSTREAMSTRING, "key" + msg.hashCode(), msg);
+        // kafkaTemplate.send(INPUTSTREAMSTRINGBUILDER, "key"+msg.hashCode(), msg);
 
         User user = new User();
         user.setId(new Random().nextInt());
         user.setName("Name " + user.getId());
         user.setDob(new Date().getTime());
-        user.setPreference(user.getId() %2 == 0 ? Preference.COFFEE: Preference.TEA);
+        user.setPreference(user.getId() % 2 == 0 ? Preference.COFFEE : Preference.TEA);
 
         kafkaUserTemplate.send("testuser", user.getId().toString(), user);
         kafkaUserTemplate.send("inputuser", user.getId().toString(), user);

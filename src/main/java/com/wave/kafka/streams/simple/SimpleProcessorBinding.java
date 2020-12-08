@@ -13,7 +13,7 @@ public interface SimpleProcessorBinding {
 
     String OUTPUTUSER = "outputuser";
 
-    String INPUTSTREAMSTRING = "inputStreamString";
+    String SIMPLE_INPUTSTREAMSTRING = "simpleinputStreamString";
     String INPUTSTREAMSTRINGBUILDER = "inputStreamStringBuilder";
     String INPUTSTREAMSTRING1 = "inputStreamString1";
 
@@ -25,11 +25,14 @@ public interface SimpleProcessorBinding {
     MessageChannel outputuser();
 
     @Input
-    SubscribableChannel inputStreamString();
+    SubscribableChannel simpleinputStreamString();
 
     @Input(INPUTSTREAMSTRINGBUILDER)
     KStream<String, String> inputStreamStringBuilder();
 
-    @Input(INPUTSTREAMSTRING1)
+    @Output(INPUTSTREAMSTRING1)
     KStream<String, String> outputStreamString();
+
+    @Input(INPUTSTREAMSTRING1)
+    KStream<String, String> intputStreamString();
 }

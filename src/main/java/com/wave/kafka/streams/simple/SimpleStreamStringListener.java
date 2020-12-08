@@ -23,6 +23,9 @@ public class SimpleStreamStringListener {
     public KStream<String, String> handle(@Input(INPUTSTREAMSTRINGBUILDER) KStream<String, String> stringStream) {
         System.out.println("Stream:: In the UppercaseSink SINK  8811 ");
 
+        // stringStream.print(Printed.toSysOut());
+        // return stringStream.filter((k,v) -> !k.isEmpty());
+
         KStream<String, String> ss = stringStream.map((k, v) ->
                 new KeyValue<>(k.toUpperCase() + "-key", new String("Stream-8811-  " + v).toUpperCase())
         );
@@ -38,7 +41,7 @@ public class SimpleStreamStringListener {
     public void handle1(@Input(INPUTSTREAMSTRING1) KStream<String, String> stringStream) {
         System.out.println("Stream:: In the UppercaseSink SINK  8812 ");
         KStream<String, String> ss = stringStream.map((k, v) ->
-                new KeyValue<>(k.toUpperCase() + "-final", new String("Stream-8812-  " + v).toUpperCase())
+                new KeyValue<>(k.toUpperCase() + "-final-8812", new String("Stream-8812-  " + v).toUpperCase())
         );
         ss.print(Printed.toSysOut());
     }

@@ -32,7 +32,7 @@ public class KafkaStreamProducerConfig {
 
 
         stream.map((k, v) ->
-                new KeyValue<>(k, new String("Stream-amit  " + v).toUpperCase())
+                new KeyValue<>(k, new String("Stream-amit-customStreamBuilder1-" + v).toUpperCase())
         ).to(INPUTSTREAMSTRINGBUILDER);
 
 

@@ -9,9 +9,10 @@ import static com.wave.kafka.streams.simple.SimpleProcessorBinding.*;
 
 @EnableBinding(SimpleProcessorBinding.class)
 public class SimpleDateSink {
-    @StreamListener(INPUTSTREAMSTRING)
+
+    @StreamListener(SIMPLE_INPUTSTREAMSTRING)
     public void handle(String s) {
-        System.out.println("Stream:: 98 In producer -> inputStreamString - consumer-> sink the SimpleDateSink SINK  98 " + s);
+        System.out.println("Stream:: 98 In producer -> simpleinputStreamString - consumer-> sink the SimpleDateSink SINK  98 " + s);
 
     }
 
