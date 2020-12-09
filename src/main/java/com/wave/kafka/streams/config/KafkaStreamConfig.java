@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.kafka.annotation.EnableKafkaStreams;
 import org.springframework.kafka.config.KafkaStreamsConfiguration;
 import org.springframework.kafka.config.StreamsBuilderFactoryBean;
@@ -31,18 +32,46 @@ public class KafkaStreamConfig {
     @Autowired
     private KafkaProperties kafkaProperties; // picks up properties from yaml
 
-  //  @Primary
-  //@Bean(name = "defaultKafkaStreams")
-  // @Bean(name = DEFAULT_STREAMS_CONFIG_BEAN_NAME)
+    @Primary
+    //@Bean(name = "defaultKafkaStreams")
+    @Bean(name = DEFAULT_STREAMS_CONFIG_BEAN_NAME)
     public KafkaStreamsConfiguration kStreamsConfigs() {
         Map<String, Object> config = new HashMap<>();
         config.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         config.put(StreamsConfig.APPLICATION_ID_CONFIG, "kafka-stream-default");
-        config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());
-        config.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass());
+        // config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());
+        // config.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass());
         return new KafkaStreamsConfiguration(config);
     }
 
+    // @Primary
+    //@Bean(name = "defaultKafkaStreams")
+    // @Bean(name = DEFAULT_STREAMS_CONFIG_BEAN_NAME)
+    public KafkaStreamsConfiguration kStreamsConfigs1(@Qualifier("defaultStreamsConfig") Map<String, Object> config) {
+        //  Map<String, Object> config = defaultStreamsConfig();
+        // config.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.serdeFrom(new UserSerialiser(), new UserDeserializer()).getClass());
+        return new KafkaStreamsConfiguration(config);
+    }
+
+    //  @Bean("defaultStreamsConfig")
+    public Map<String, Object> defaultStreamsConfig() {
+        Map<String, Object> config = new HashMap<>();
+        config.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        config.put(StreamsConfig.APPLICATION_ID_CONFIG, "kafka-stream-default1");
+        config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());
+        config.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass());
+        return config;
+    }
+
+    //@Bean("userStreamsConfig")
+    public Map<String, Object> userStreamsConfig() {
+        Map<String, Object> config = new HashMap<>();
+        config.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        config.put(StreamsConfig.APPLICATION_ID_CONFIG, "kafka-stream-user");
+        config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());
+        config.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.serdeFrom(new UserSerialiser(), new UserDeserializer()).getClass());
+        return config;
+    }
 
     @Bean(name = "customStreamBuilder")
     public FactoryBean<StreamsBuilder> customStreamBuilder(
@@ -51,7 +80,7 @@ public class KafkaStreamConfig {
             ObjectProvider<StreamsBuilderFactoryBeanCustomizer> customizerProvider) {
         Map<String, Object> config = new HashMap<>();
         config.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-        config.put(StreamsConfig.APPLICATION_ID_CONFIG, "kafka-stream-custom-string");
+        config.put(StreamsConfig.APPLICATION_ID_CONFIG, "kafka-stream-custom");
         config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.serdeFrom(String.class).getClass());
         config.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.serdeFrom(String.class).getClass());
 
@@ -83,7 +112,7 @@ public class KafkaStreamConfig {
             ObjectProvider<StreamsBuilderFactoryBeanCustomizer> customizerProvider) {
         Map<String, Object> config = new HashMap<>();
         config.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-        config.put(StreamsConfig.APPLICATION_ID_CONFIG, "kafka-stream-custom-user");
+        config.put(StreamsConfig.APPLICATION_ID_CONFIG, "kafka-stream-custom");
         config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());
         config.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.serdeFrom(new UserSerialiser(), new UserDeserializer()).getClass());
 

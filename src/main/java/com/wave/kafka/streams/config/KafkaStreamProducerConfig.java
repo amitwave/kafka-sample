@@ -4,7 +4,6 @@ import com.wave.kafka.model.User;
 import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.kstream.KStream;
-import org.apache.kafka.streams.kstream.Printed;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +12,7 @@ import org.springframework.kafka.annotation.EnableKafkaStreams;
 import static com.wave.kafka.streams.simple.SimpleProcessorBinding.INPUT;
 import static com.wave.kafka.streams.simple.SimpleProcessorBinding.INPUTSTREAMSTRINGBUILDER;
 import static com.wave.kafka.streams.user.UserProcessorBinding.INPUTUSERSTREAM;
-import static com.wave.kafka.streams.user.UserProcessorBinding.INPUTUSERSTREAMSTRINGBUILDER;
+import static com.wave.kafka.streams.user.UserProcessorBinding.OUTPUTUSERSTREAM;
 
 
 //@EnableBinding(WaveProcessorBinding.class)
@@ -40,20 +39,20 @@ public class KafkaStreamProducerConfig {
 
     //@StreamListener("input")
     //@SendTo("outputuser")
-    @Bean//("userstream")
+    // @Bean//("userstream")
     public KStream<String, User> userstream(@Qualifier("customUserStreamBuilder") StreamsBuilder kStreamBuilder) {
 
-        System.out.println("in the customUserStreamBuilder:: ");
+        System.out.println("in the sink 333:: ");
         KStream<String, User> stream = kStreamBuilder.stream(INPUTUSERSTREAM);
-        stream.print(Printed.toSysOut());
-        System.out.println("in the user customUserStreamBuilder :: ");
+
+        System.out.println("in the user Sink 333 :: ");
         //  stream.print(Printed.toSysOut());
 
 
         stream.map((k, v) ->
                 new KeyValue<>(k, new User(v.getId(), v.getName() + "--customUserStreamBuilder", v.getDob(), v.getPreference()))
-        ).to(INPUTUSERSTREAMSTRINGBUILDER);
-        stream.print(Printed.toSysOut());
+        ).to(OUTPUTUSERSTREAM);
+
 
         return stream;
     }
