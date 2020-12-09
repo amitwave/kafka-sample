@@ -1,5 +1,6 @@
 package com.wave.kafka.streams.user;
 
+import com.wave.kafka.model.User;
 import org.apache.kafka.streams.kstream.KStream;
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.cloud.stream.annotation.Output;
@@ -7,7 +8,7 @@ import org.springframework.cloud.stream.annotation.Output;
 
 public interface UserProcessorBinding {
 
-    //  String INPUTUSERSTREAM = "inputuserstream";
+    String INPUTUSERSTREAM = "inputuserstream";
     String OUTPUTUSERSTREAM = "outputuserstream";
 
     String OUTPUTUSERSTREAMTEA = "outputuserstreamtea";
@@ -29,13 +30,13 @@ public interface UserProcessorBinding {
     @Input(INPUTUSERSTREAMCOFFEE)
     KStream outputuserstreamcoffee();
 
-    /*
-        @Input(INPUTUSERSTREAM)
-        KStream inputStream();
 
-    */
     @Input(OUTPUTUSERSTREAM)
-    KStream outputStream();
+    KStream<String, User> inputStream();
+
+
+    @Output(OUTPUTUSERSTREAM)
+    KStream<String, User> outputStream();
 
 
     @Output(OUTPUTUSERSTREAMTEA)
