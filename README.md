@@ -24,3 +24,7 @@ This code includes a `docker-compose.yml` file so you can use Docker Compose to 
 
 Give a star to this project and/or [buy me a coffee](https://buymeacoff.ee/ZyLJNUR) 😄
 # kafka-sample
+
+
+
+run http://localhost:8080/wave/health-check to publish data

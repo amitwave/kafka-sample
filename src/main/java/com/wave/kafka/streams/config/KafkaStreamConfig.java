@@ -44,14 +44,6 @@ public class KafkaStreamConfig {
         return new KafkaStreamsConfiguration(config);
     }
 
-    // @Primary
-    //@Bean(name = "defaultKafkaStreams")
-    // @Bean(name = DEFAULT_STREAMS_CONFIG_BEAN_NAME)
-    public KafkaStreamsConfiguration kStreamsConfigs1(@Qualifier("defaultStreamsConfig") Map<String, Object> config) {
-        //  Map<String, Object> config = defaultStreamsConfig();
-        // config.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.serdeFrom(new UserSerialiser(), new UserDeserializer()).getClass());
-        return new KafkaStreamsConfiguration(config);
-    }
 
     @Bean("defaultStreamsConfig")
     public Map<String, Object> defaultStreamsConfig() {
