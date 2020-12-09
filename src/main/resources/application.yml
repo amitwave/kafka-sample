@@ -1,4 +1,14 @@
-
+spring:
+  application:
+    name: kafka
+  cloud:
+    stream:
+      bindings:
+        #startOffset: latest
+        INPUTUSERSTREAMSTRINGBUILDER:
+          destination: INPUTUSERSTREAMSTRINGBUILDER
+        output:
+          destination: bar
 
 server:
   servlet:
