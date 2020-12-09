@@ -12,7 +12,7 @@ public class SimpleDateSink {
 
     @StreamListener(SIMPLE_INPUTSTREAMSTRING)
     public void handle(String s) {
-        System.out.println("Stream:: 98 Final In producer -> simpleinputStreamString - consumer-> sink the SimpleDateSink SINK  98 " + s);
+        System.out.println("Stream:: 98 In producer -> simpleinputStreamString - consumer-> sink the SimpleDateSink SINK  98 " + s);
 
     }
 
@@ -29,7 +29,7 @@ public class SimpleDateSink {
 
     @StreamListener(OUTPUTUSER)
     public void handle2(User s) {
-        System.out.println("Stream:: 100 Final In producer -> outputuser - consumer-> sink the SimpleDateSink user SINK  100 " + s);
+        System.out.println("Stream:: 100 In producer -> outputuser - consumer-> sink the SimpleDateSink user SINK  100 " + s);
     }
 
 

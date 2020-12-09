@@ -39,8 +39,8 @@ public class KafkaStreamConfig {
         Map<String, Object> config = new HashMap<>();
         config.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         config.put(StreamsConfig.APPLICATION_ID_CONFIG, "kafka-stream-default");
-        // config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());
-        // config.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass());
+        config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());
+        config.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass());
         return new KafkaStreamsConfiguration(config);
     }
 
@@ -53,7 +53,7 @@ public class KafkaStreamConfig {
         return new KafkaStreamsConfiguration(config);
     }
 
-    //  @Bean("defaultStreamsConfig")
+    @Bean("defaultStreamsConfig")
     public Map<String, Object> defaultStreamsConfig() {
         Map<String, Object> config = new HashMap<>();
         config.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
@@ -63,7 +63,7 @@ public class KafkaStreamConfig {
         return config;
     }
 
-    //@Bean("userStreamsConfig")
+    @Bean("userStreamsConfig")
     public Map<String, Object> userStreamsConfig() {
         Map<String, Object> config = new HashMap<>();
         config.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
@@ -73,8 +73,8 @@ public class KafkaStreamConfig {
         return config;
     }
 
-    @Bean(name = "customStreamBuilder")
-    public FactoryBean<StreamsBuilder> customStreamBuilder(
+    @Bean(name = "customStreamBuilder1")
+    public FactoryBean<StreamsBuilder> customStreamBuilder1(
             @Qualifier(DEFAULT_STREAMS_CONFIG_BEAN_NAME)
                     ObjectProvider<KafkaStreamsConfiguration> streamsConfigProvider,
             ObjectProvider<StreamsBuilderFactoryBeanCustomizer> customizerProvider) {
@@ -105,8 +105,8 @@ public class KafkaStreamConfig {
         }
     }
 
-    @Bean(name = "customUserStreamBuilder")
-    public FactoryBean<StreamsBuilder> customUserStreamBuilder(
+    @Bean(name = "customStreamBuilder")
+    public FactoryBean<StreamsBuilder> customStreamBuilder(
             @Qualifier(DEFAULT_STREAMS_CONFIG_BEAN_NAME)
                     ObjectProvider<KafkaStreamsConfiguration> streamsConfigProvider,
             ObjectProvider<StreamsBuilderFactoryBeanCustomizer> customizerProvider) {

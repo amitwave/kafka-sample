@@ -10,15 +10,6 @@ public class User {
     private Long dob;
     private Preference preference;
 
-    public User() {
-    }
-
-    public User(Integer id, String name, Long dob, Preference preference) {
-        this.id = id;
-        this.name = name;
-        this.dob = dob;
-        this.preference = preference;
-    }
 
     public Integer getId() {
         return id;

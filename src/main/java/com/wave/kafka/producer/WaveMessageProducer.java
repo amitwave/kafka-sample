@@ -14,8 +14,7 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 import java.util.Random;
 
-import static com.wave.kafka.streams.simple.SimpleProcessorBinding.*;
-import static com.wave.kafka.streams.user.UserProcessorBinding.INPUTUSERSTREAM;
+import static com.wave.kafka.streams.simple.SimpleProcessorBinding.SIMPLE_INPUTSTREAMSTRING;
 
 @Component
 public class WaveMessageProducer {
@@ -51,9 +50,9 @@ public class WaveMessageProducer {
 
             }
         });
-        kafkaTemplate.send("test", "test--key" + msg.hashCode(), msg);
-        kafkaTemplate.send(INPUT, INPUT + "--key" + msg.hashCode(), msg);
-        kafkaTemplate.send(SIMPLE_INPUTSTREAMSTRING, SIMPLE_INPUTSTREAMSTRING + "--key" + msg.hashCode(), msg);
+        kafkaTemplate.send("test", "key" + msg.hashCode(), msg);
+        kafkaTemplate.send("input", "key" + msg.hashCode(), msg);
+        kafkaTemplate.send(SIMPLE_INPUTSTREAMSTRING, "key" + msg.hashCode(), msg);
         // kafkaTemplate.send(INPUTSTREAMSTRINGBUILDER, "key"+msg.hashCode(), msg);
 
         User user = new User();
@@ -62,9 +61,9 @@ public class WaveMessageProducer {
         user.setDob(new Date().getTime());
         user.setPreference(user.getId() % 2 == 0 ? Preference.COFFEE : Preference.TEA);
 
-        kafkaUserTemplate.send("testuser", "testuser--" + user.getId().toString(), user);
-        kafkaUserTemplate.send(INPUTUSER, INPUTUSER + "--" + user.getId().toString(), user);
-        kafkaUserTemplate.send(INPUTUSERSTREAM, INPUTUSERSTREAM + "--" + user.getId().toString(), user);
+        kafkaUserTemplate.send("testuser", user.getId().toString(), user);
+        kafkaUserTemplate.send("inputuser", user.getId().toString(), user);
+        kafkaUserTemplate.send("inputuserstream", user.getId().toString(), user);
     }
 
 
