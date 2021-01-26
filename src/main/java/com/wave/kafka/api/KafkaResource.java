@@ -1,12 +1,12 @@
 package com.wave.kafka.api;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.wave.kafka.producer.WaveMessageProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
@@ -23,10 +23,8 @@ public class KafkaResource {
     private final AtomicLong counter = new AtomicLong();
 
 
-
-
     @GetMapping(value = "/health-check")
-    public ResponseEntity healthcheck(){
+    public ResponseEntity healthcheck() throws JsonProcessingException {
         waveMessageProducer.sendMessage("hi " + new Date());
         return ResponseEntity.ok("Success " + new Date().toString());
     }

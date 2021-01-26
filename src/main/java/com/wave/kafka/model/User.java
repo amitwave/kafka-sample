@@ -1,9 +1,9 @@
 package com.wave.kafka.model;
 
-/**
- * Created by amit on 18/01/2020.
- */
-public class User {
+import java.io.Serializable;
+
+
+public class User implements Serializable {
 
     private Integer id;
     private String name;
@@ -52,7 +52,6 @@ public class User {
                 ", preference=" + preference +
                 '}';
     }
-
 
     @Override
     public boolean equals(Object o) {

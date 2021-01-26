@@ -14,6 +14,7 @@ public interface SimpleProcessorBinding {
     String OUTPUTUSER = "outputuser";
 
     String SIMPLE_INPUTSTREAMSTRING = "simpleinputStreamString";
+    String SIMPLE_INPUTSTREAMSTRING11 = "simpleinputStreamString11";
     String INPUTSTREAMSTRINGBUILDER = "inputStreamStringBuilder";
     String INPUTSTREAMSTRING1 = "inputStreamString1";
 
